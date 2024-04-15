@@ -46,13 +46,13 @@ const nextMonthDaysCount = computed(() => {
     <div v-for="(day, index) in weekDays" :key="index" class="text-green-300 text-center">
       {{ day }}
     </div>
-    <div v-for="day in lastMonthDaysArray" :key="day" class="text-gray-300 text-center">
+    <div v-for="day in lastMonthDaysArray" :key="day" class="text-gray-300 text-center lastMonthDays">
       {{ day }}
     </div>
-    <div v-for="day in currentMonthDaysCount" :key="day" class="text-center">
+    <div v-for="day in currentMonthDaysCount" :key="day" class="text-center currentMonthDays">
       {{ day }}
     </div>
-    <div v-for="day in nextMonthDaysCount" :key="day" class="text-gray-300 text-center">
+    <div v-for="day in nextMonthDaysCount" :key="day" class="text-gray-300 text-center nextMonthDays">
       {{ day }}
     </div>
   </div>
