@@ -4,6 +4,7 @@ import { computed } from 'vue';
 const props = defineProps<{
   year: number;
   month: number;
+  weekDays: string[];
 }>()
 
 const SUNDAY_INDEX = 0;
@@ -42,6 +43,9 @@ const nextMonthDaysCount = computed(() => {
 
 <template>
   <div class="grid grid-cols-7 gap-4">
+    <div v-for="(day, index) in weekDays" :key="index" class="text-green-300 text-center">
+      {{ day }}
+    </div>
     <div v-for="day in lastMonthDaysArray" :key="day" class="text-gray-300 text-center">
       {{ day }}
     </div>
