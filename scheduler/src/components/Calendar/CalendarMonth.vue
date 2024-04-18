@@ -12,6 +12,7 @@ const SATURDAY_INDEX = 6;
 const ROWS_PER_MONTH = 5;
 const DAYS_IN_WEEK = 7;
 
+const today = new Date().getDate();
 const columnNumber = DAYS_IN_WEEK;
 const firstDayOfMonthIndex = computed(() => new Date(props.year, props.month, 1).getDay());
 const currentMonthDaysCount = computed(() => new Date(props.year, props.month + 1, 0).getDate());
@@ -50,7 +51,7 @@ const nextMonthDaysCount = computed(() => {
       {{ day }}
     </div>
     <div v-for="day in currentMonthDaysCount" :key="day" class="text-center currentMonthDays">
-      {{ day }}
+      <span :class="[{ 'bg-green-200': day === today }, 'p-2 rounded-full']">{{ day }}</span>
     </div>
     <div v-for="day in nextMonthDaysCount" :key="day" class="text-gray-300 text-center nextMonthDays">
       {{ day }}
