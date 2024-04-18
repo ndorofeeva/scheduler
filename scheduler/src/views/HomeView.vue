@@ -36,9 +36,11 @@ const calculateMonth = (newMonthIndex: number) => {
       </div>
       <div class="content border border-indigo-600 p-5">
         <div class="flex justify-between">
-          <div @click="calculateMonth(react.month - 1)" class="text-pink-300 cursor-pointer"> Prev </div>
+          <div @click="calculateMonth(react.month - 1)" class="text-pink-300 cursor-pointer" data-cy="prev-month"> Prev
+          </div>
           <div class="text-pink-600">{{ months[react.month] }} {{ react.year }}</div>
-          <div @click="calculateMonth(react.month + 1)" class="text-pink-300 cursor-pointer"> Next </div>
+          <div @click="calculateMonth(react.month + 1)" class="text-pink-300 cursor-pointer" data-cy="next-month"> Next
+          </div>
         </div>
         <CalendarMonth :year="react.year" :month="react.month" :weekDays="weekDays" />
       </div>
