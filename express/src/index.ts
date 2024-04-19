@@ -1,15 +1,29 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import express, { Application} from 'express';
+import cors, { CorsOptions } from "cors";
+import Routes from './routes';
 
-dotenv.config();
+const port: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const app: Application = express();
 
-const app: Express = express();
-const port = process.env.PORT;
+const corsOptions: CorsOptions = {
+  origin: `http://localhost:${port}`
+};
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
-});
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+new Routes(app);
+
+app
+  .listen(port, "localhost", function () {
+    console.log(`Server is running on port ${port}.`);
+  })
+  .on("error", (err: any) => {
+    if (err.code === "EADDRINUSE") {
+      console.log("Error: address already in use");
+    } else {
+      console.log(err);
+    }
+  });
+  
