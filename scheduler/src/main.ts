@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import axios from 'axios'
 import './assets/main.css'
 
 import App from './App.vue'
@@ -9,5 +10,6 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.provide('axios', axios)
 
 app.mount('#app')
