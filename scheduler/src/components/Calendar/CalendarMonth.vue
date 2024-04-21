@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import type Task from '@/models/task';
+import moment from 'moment'
 
 const props = defineProps<{
   year: number;
   month: number;
   weekDays: string[];
+  tasks?: Task[];
 }>()
 
 const SUNDAY_INDEX = 0;
@@ -41,6 +44,16 @@ const nextMonthDaysCount = computed(() => {
   return rowNumber * columnNumber - currentMonthDaysCount.value - lastMonthDaysCount.value
 });
 
+const getTasksByDay = (day: number) => {
+  if(!props.tasks) return;
+  const month = props.month < 10 ? `0${props.month + 1}` : props.month + 1;
+  return props.tasks.filter((task) => {
+    if (!task.startTime) return;
+    const startDate = moment(task.startTime).format('YYYY-MM-DD'); //TODO: to settings
+    return startDate === `${props.year}-${month}-${day}`;
+  });
+}
+
 </script>
 
 <template>
@@ -53,6 +66,9 @@ const nextMonthDaysCount = computed(() => {
     </div>
     <div v-for="day in currentMonthDaysCount" :key="day" class="text-center currentMonthDays">
       <span :class="[{ 'bg-green-200': day === today && month === currentMonth }, 'p-2 rounded-full']">{{ day }}</span>
+      <div v-for="(task, index) in getTasksByDay(day)" :key="index"> 
+        {{ task.title }} 
+      </div>
     </div>
     <div v-for="day in nextMonthDaysCount" :key="day" class="text-gray-300 text-center nextMonthDays">
       {{ day }}
