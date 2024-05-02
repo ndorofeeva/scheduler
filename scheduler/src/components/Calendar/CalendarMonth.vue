@@ -24,14 +24,9 @@ const currentMonthDaysCount = computed(() => new Date(props.year, props.month + 
 const lastMonthDaysCount = computed(() =>
   firstDayOfMonthIndex.value === SUNDAY_INDEX ? DAYS_IN_WEEK - 1 : firstDayOfMonthIndex.value - 1);
 
-function* genLastMonthDays(lastDayOfPrevMonth: number) {
-  for (var i = lastMonthDaysCount.value - 1; i >= 0; i--) {
-    yield lastDayOfPrevMonth - i;
-  }
-}
 const lastMonthDaysArray = computed(() => {
   const lastDayOfPrevMonth = new Date(props.year, props.month, 0).getDate();
-  return genLastMonthDays(lastDayOfPrevMonth);
+  return Array.from({ length: lastMonthDaysCount.value}, (value, index) => lastDayOfPrevMonth - index).reverse();
 });
 
 const nextMonthDaysCount = computed(() => {
