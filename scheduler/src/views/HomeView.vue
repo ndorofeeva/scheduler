@@ -40,22 +40,22 @@ const calculateMonth = (newMonthIndex: number) => {
 </script>
 
 <template>
-  <main>
-    <div class="grid gap-4 grid-cols-[1fr_3fr_1fr]">
-      <div class="left-sidebar border border-indigo-600 p-5">
+  <main class="grow">
+    <div class="grid grid-cols-[1fr_3fr_1fr] h-full">
+      <div class="left-sidebar border border-gray-200 p-5">
         Left
       </div>
-      <div class="content border border-indigo-600 p-5">
-        <div class="flex justify-between">
-          <div @click="calculateMonth(react.month - 1)" class="text-pink-300 cursor-pointer" data-cy="prev-month"> Prev
+      <div class="content border border-gray-200 flex flex-col">
+        <div class="flex justify-between p-5">
+          <div @click="calculateMonth(react.month - 1)" class="cursor-pointer" data-cy="prev-month"> Prev
           </div>
-          <div class="text-pink-600">{{ months[react.month] }} {{ react.year }}</div>
-          <div @click="calculateMonth(react.month + 1)" class="text-pink-300 cursor-pointer" data-cy="next-month"> Next
+          <div class="font-black">{{ months[react.month] }} {{ react.year }}</div>
+          <div @click="calculateMonth(react.month + 1)" class="cursor-pointer" data-cy="next-month"> Next
           </div>
         </div>
         <CalendarMonth :year="react.year" :month="react.month" :weekDays="weekDays" :tasks="react.tasks" />
       </div>
-      <div class="right-sidebar border border-indigo-600 p-5">
+      <div class="right-sidebar border border-grsay-200 p-5">
         Right
       </div>
     </div>

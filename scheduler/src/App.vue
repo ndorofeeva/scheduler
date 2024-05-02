@@ -10,14 +10,14 @@ const react = reactive(
 </script>
 
 <template>
-  <header>
+  <header class="py-2">
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="48" height="48" />
     <div class="flex">
       <svg-icon v-if="react.darkMode" type="mdi" :path="mdiToggleSwitch" :size="48"
-        @click="react.darkMode = !react.darkMode"></svg-icon>
+        @click="react.darkMode = !react.darkMode" color="lightgray"></svg-icon>
       <svg-icon v-if="!react.darkMode" type="mdi" :path="mdiToggleSwitchOffOutline" :size="48"
-        @click="react.darkMode = !react.darkMode"></svg-icon>
-      <svg-icon type="mdi" :path="mdiAccountCircle" :size="48"></svg-icon>
+        @click="react.darkMode = !react.darkMode" color="lightgray"></svg-icon>
+      <svg-icon type="mdi" :path="mdiAccountCircle" :size="48" color="lightgray"></svg-icon>
     </div>
   </header>
 

@@ -6,10 +6,12 @@
 
 #app {
   width: 100%;
-  max-width: 1280px;
+  height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem;
   font-weight: normal;
+  display: flex;
+  flex-direction: column;
 }
 
 a,

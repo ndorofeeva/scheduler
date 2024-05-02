@@ -45,7 +45,7 @@ const nextMonthDaysCount = computed(() => {
 });
 
 const getTasksByDay = (day: number) => {
-  if(!props.tasks) return;
+  if(!props.tasks) return [];
   const month = props.month < 10 ? `0${props.month + 1}` : props.month + 1;
   return props.tasks.filter((task) => {
     if (!task.startTime) return;
@@ -54,23 +54,49 @@ const getTasksByDay = (day: number) => {
   });
 }
 
+const showAllTasks = () => {
+  // todo: implement show tasks in modal
+}
+
 </script>
 
 <template>
-  <div class="grid grid-cols-7 gap-4">
-    <div v-for="(day, index) in weekDays" :key="index" class="text-green-300 text-center">
+  <div class="grid grid-cols-7">
+    <div v-for="(day, index) in weekDays" :key="index" class="text-gray-400 text-center">
       {{ day }}
     </div>
-    <div v-for="day in lastMonthDaysArray" :key="day" class="text-gray-300 text-center lastMonthDays">
+  </div>
+  <div class="grid grid-cols-7 current-month auto-rows-fr text-xs grow">
+    <div
+      v-for="day in lastMonthDaysArray"
+      :key="day"
+      class="text-gray-300 text-center lastMonthDays border border-gray-200 p-1"
+    >
       {{ day }}
     </div>
-    <div v-for="day in currentMonthDaysCount" :key="day" class="text-center currentMonthDays">
-      <span :class="[{ 'bg-green-200': day === today && month === currentMonth }, 'p-2 rounded-full']">{{ day }}</span>
-      <div v-for="(task, index) in getTasksByDay(day)" :key="index"> 
-        {{ task.title }} 
+    <div 
+      v-for="day in currentMonthDaysCount"
+      :key="day"
+      class="text-center currentMonthDays border border-gray-200 overflow-hidden py-1 px-2"
+    >
+      <span :class="[{ 'bg-green-200 inline-block rounded-full leading-6 w-6 h-6': day === today && month === currentMonth }]">
+        {{ day }}
+      </span>
+      <div v-if="getTasksByDay(day).length > 0"> 
+        <div
+          v-for="(task, index) in getTasksByDay(day).slice(0,2)"
+          :key="index"
+          :title="task.title"
+          class="bg-amber-200 rounded-full whitespace-nowrap overflow-hidden text-ellipsis px-2 my-1"
+        >
+          {{ task.title }}
+        </div>
+        <div v-if="getTasksByDay(day).length > 2" class="cursor-pointer" @onclick="showAllTasks()">
+          See all {{ getTasksByDay(day).length }} tasks
+        </div> 
       </div>
     </div>
-    <div v-for="day in nextMonthDaysCount" :key="day" class="text-gray-300 text-center nextMonthDays">
+    <div v-for="day in nextMonthDaysCount" :key="day" class="text-gray-300 text-center nextMonthDays border border-gray-200 p-1">
       {{ day }}
     </div>
   </div>
