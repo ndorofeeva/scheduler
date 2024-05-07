@@ -11,7 +11,7 @@ const react = reactive(
 
 <template>
   <header class="py-2">
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="48" height="48" />
+    <img alt="Vue logo" class="logo rounded-full" src="/logo_temp.png" width="48" height="48" />
     <div class="flex">
       <svg-icon v-if="react.darkMode" type="mdi" :path="mdiToggleSwitch" :size="48"
         @click="react.darkMode = !react.darkMode" color="lightgray"></svg-icon>
