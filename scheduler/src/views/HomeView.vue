@@ -4,6 +4,7 @@ import taskService from '@/services/task-service';
 import type ResponseData from '@/services/types';
 import type Calendar from '@/models/calendar'
 import CalendarMonth from '../components/Calendar/CalendarMonth.vue'
+import HighPriorityTasks from '../components/HighPriorityTasks.vue'
 
 const FIRST_MONTH_INDEX = 0;
 const LAST_MONTH_INDEX = 11;
@@ -22,6 +23,7 @@ onMounted(() => {
   taskService.getAll().then((responseData: ResponseData) => {
     react.tasks.push(...responseData.data);
   });
+  //TODO: get tasks per month
 })
 
 const calculateMonth = (newMonthIndex: number) => {
@@ -43,7 +45,7 @@ const calculateMonth = (newMonthIndex: number) => {
   <main class="grow">
     <div class="grid grid-cols-[1fr_3fr_1fr] h-full">
       <div class="left-sidebar border border-gray-200 p-5">
-        Left
+        <HighPriorityTasks :tasks="react.tasks" />
       </div>
       <div class="content border border-gray-200 flex flex-col">
         <div class="flex justify-between p-5">
